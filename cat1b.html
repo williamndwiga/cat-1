@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>number system converter website</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 30px;
+            background-color: aqua;
+        }
+        label, select, input, button {
+            font-size: 1.2em;
+            margin: 15px;
+            display: block;
+        }
+        #result {
+            margin-top: 25px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<h2>Number system converter</h2>
+<label for="inputNumber">Enter number:</label>
+<input type="text" id="inputNumber">
+
+<label for="fromBase">From:</label>
+<select id="fromBase">
+    <option value="2">Binary</option>
+    <option value="8">Octal</option>
+    <option value="10" selected>Decimal</option>
+    <option value="16">Hexadecimal</option>
+</select>
+<label for="toBase">To:</label>
+<select id="toBase">
+    <option value="2">Binary</option>
+    <option value="8">Octal</option>
+    <option value="10" selected>Decimal</option>
+    <option value="16">Hexadecimal</option>
+</select>
+<button onclick="convertNumber()">Convert</button>
+<div id="result"></div>
+
+<script>
+function convertNumber() {
+    const input = document.getElementById('inputNumber').value.trim();
+    const fromBase = parseInt(document.getElementById('fromBase').value);
+    const toBase = parseInt(document.getElementById('toBase').value);
+    
+    try {
+        const decimal = parseInt(input, fromBase);
+        if (isNaN(decimal)) throw new Error();
+        const converted = decimal.toString(toBase).toUpperCase();
+        document.getElementById('result').innerText = "Result: " + converted;
+    }
+    catch (error) {
+        document.getElementById('result').innerText = "Invalid input!";
+    }
+}
+</script>
+</body>
+</html>
